@@ -1,0 +1,81 @@
+\documentclass[11pt,a4paper,twoside]{report}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+% \usepackage[pdftex,colorlinks]{hyperref}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage[explicit]{titlesec}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{etoolbox}
+\usepackage{lastpage}
+\usepackage{index}
+% \usepackage{libertine}
+\usepackage{mdframed}
+\usepackage{colortbl}
+\usepackage{geometry}
+\usepackage{acronym}
+\usepackage{manfnt}
+\usepackage{subfig}
+\usepackage{enumitem}
+\usepackage{afterpage}
+\usepackage[parfill]{parskip}
+\usepackage{array}
+\usepackage[acronyms,style=super,order=word]{glossaries}
+\usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
+% \usepackage{csquotes}
+
+% Configuration
+\pagenumbering{Roman}
+\input{config}
+
+% Acronyms configuration
+\setacronymstyle{long-sc-short}
+\loadglsentries{includes/acronyms.tex}
+\loadglsentries{includes/glossary.tex}
+
+\bibliography{includes/bibliography}
+
+\makenoidxglossaries
+% \makeindex % Uncomment if makenoidxglossaries is not sorting entries
+
+% Variables
+\newcommand{\version}{1.0}
+\renewcommand{\title}{Gestion des identités dans un SI existant}
+\newcommand{\subtitle}{Rapport - Stage fin d'année - Alonso GIRALDO}
+\newcommand{\reference}{S01}
+
+% Document starts here
+\begin{document}
+
+% Cover page
+\afterpage{\blankpage}
+\input{includes/cover}
+
+% Table of contents
+% \tableofcontents
+% \newpage
+
+%\listoftables  % Uncomment for tables list
+%\listofscripts % Uncomment for scripts list
+
+\pagenumbering{arabic}
+
+% Contents
+\input{includes/remerciements}
+\input{includes/resume}
+\input{includes/introduction}
+
+% \listoffigures
+% \clearpage
+
+\printnoidxglossaries
+% \printbibliography
+
+% \clearpage
+% \tail
+% \end{document}
