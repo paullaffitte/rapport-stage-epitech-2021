@@ -1,0 +1,32 @@
+{
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk 🔃",
+      "tools": [
+        "latexmk",
+        "cp-result"
+      ]
+    }
+  ],
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-pdf",
+        "-output-directory=%TMPDIR%",
+        "%DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "cp-result",
+      "command": "cp",
+      "args": [
+        "%TMPDIR%/%DOCFILE%.pdf",
+        "%DOC%.pdf"
+      ],
+      "env": {}
+    },
+  ]
+}
