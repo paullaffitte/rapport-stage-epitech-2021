@@ -4,10 +4,12 @@ End of study internship report - Promotion {EPITECH.} 2021
 ## Install dependencies
 
 ```bash
-sudo apt update && install -y \
+sudo apt update && sudo apt install -y \
   texlive \
   texlive-latex-extra \
   latexmk
+
+tlmgr init-usertree
 
 tlmgr install --verify-repo=none --usermode --no-persistent-downloads \
   biblatex \
@@ -21,7 +23,7 @@ tlmgr install --verify-repo=none --usermode --no-persistent-downloads \
 
 ## Troubleshooting
 
-### tlmgr: Local TeX Live (20XX) is older than remote repository (20YY).
+### tlmgr: Local TeX Live (20XX) is older than remote repository (20YY)
 
 ```bash
 tlmgr repository add ftp://tug.org/historic/systems/texlive/20XX/tlnet-final
