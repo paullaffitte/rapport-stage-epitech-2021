@@ -28,26 +28,16 @@
 \usepackage[acronyms,style=super,order=word]{glossaries}
 \usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
 \usepackage{csquotes}
+\usepackage{lmodern}
+\usepackage{caption}
 
 % Configuration
 \pagenumbering{Roman}
 \input{config}
 
-% Acronyms configuration
-\setacronymstyle{long-sc-short}
-\loadglsentries{includes/acronyms.tex}
-\loadglsentries{includes/glossary.tex}
-
-\bibliography{includes/bibliography}
-
-\makenoidxglossaries
-% \makeindex % Uncomment if makenoidxglossaries is not sorting entries
-
 % Variables
-\newcommand{\version}{1.0}
-\renewcommand{\title}{Gestion des identités dans un SI existant}
-\newcommand{\subtitle}{Rapport - Stage fin d'année - Alonso GIRALDO}
-\newcommand{\reference}{S01}
+\renewcommand{\title}{Storage in the cloud}
+\newcommand{\subtitle}{Internship report - Paul LAFFITTE}
 
 % Document starts here
 \begin{document}
@@ -56,26 +46,23 @@
 \afterpage{\blankpage}
 \input{includes/cover}
 
+% \begin{center}
+%     \includegraphics[height=10cm]{./image.png}
+%     \captionof{figure}{Slack screenshot}
+% \end{center}
+
 % Table of contents
 \tableofcontents
 \newpage
 
-%\listoftables  % Uncomment for tables list
-%\listofscripts % Uncomment for scripts list
-
 \pagenumbering{arabic}
 
 % Contents
-\input{includes/remerciements}
-\input{includes/resume}
 \input{includes/introduction}
+\input{includes/thanks}
 
 \listoffigures
 \clearpage
 
-% \printnoidxglossaries
-\printbibliography
-
 \clearpage
-\tail
 \end{document}

@@ -2,7 +2,7 @@
 \titleformat{\chapter}[frame]
 {\normalfont}
 {\filleft
-\enspace \MakeUppercase{\chaptertitlename} \thechapter\enspace}
+\enspace PART \thechapter\enspace}
 {3ex}
 {\LARGE\bfseries\filright#1}
 \titlespacing{\chapter}{0pt}{*-6}{*6}
@@ -13,34 +13,22 @@
 \fancypagestyle{plain}{
 \fancyhf{}
 \fancyhead[C]{}
-\fancyfoot[L]{Octo Technology}
+\fancyfoot[L]{Enix}
 \fancyfoot[R]{page \thepage{}}
 \fancyfoot[C]{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{1pt}}
 
 % Regular page headers and footers
-\newcommand{\head}{
-  \lhead{\textbf{\title{} - v\version}}
-  \chead{}
-  \rhead{\today}
-  \lfoot{Octo Technology}
-  \cfoot{\vspace*{0.5cm}}
-  \rfoot{page \thepage}
+\lhead{\textbf{\title{}}}
+\chead{}
+\rhead{\today}
+\lfoot{Enix}
+\cfoot{\vspace*{0.5cm}}
+\rfoot{page \thepage}
 
-  \renewcommand{\headrulewidth}{1pt}
-  \renewcommand{\footrulewidth}{1pt}
-}
-\head
-
-% End of document
-\newcommand{\tail}{
-  \vfill
-    \begin{center}
-      \textbf{--- FIN DU DOCUMENT ---}
-    \end{center}
-  \vfill
-}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
 
 % Empty page
 \newcommand\blankpage{
@@ -52,7 +40,7 @@
 
 \setlength{\parindent}{1.5em}
 
-\graphicspath{{pictures/}}
+\graphicspath{{assets/}}
 
 \geometry{
   paper           = a4paper,
@@ -71,7 +59,7 @@
 %   bookmarks   = true,
 %   unicode     = yes,
 %   pdftitle    = {},
-%   pdfauthor   = {OCTO},
+%   pdfauthor   = {Paul Laffitte},
 %   pdfsubject  = {},
 %   pdfkeywords = {},
 %   colorlinks  = true,
