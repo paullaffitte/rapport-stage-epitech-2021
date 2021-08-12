@@ -4,7 +4,7 @@
       "name": "latexmk 🔃",
       "tools": [
         "latexmk",
-        "cp-result"
+        "mv-result"
       ]
     }
   ],
@@ -20,11 +20,11 @@
       "env": {}
     },
     {
-      "name": "cp-result",
-      "command": "cp",
+      "name": "mv-result",
+      "command": "mv",
       "args": [
         "%TMPDIR%/%DOCFILE%.pdf",
-        "%DOC%.pdf"
+        "../stageTECH5_2021_paul.laffitte@epitech.eu.pdf"
       ],
       "env": {}
     },

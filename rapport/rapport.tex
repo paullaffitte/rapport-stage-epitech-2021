@@ -38,6 +38,31 @@
 % Variables
 \renewcommand{\title}{Storage in the cloud}
 \newcommand{\subtitle}{Internship report - Paul LAFFITTE}
+\newcommand{\mail}[2]{
+    {\parindent0pt
+        \textbf{To:} Sébastien Wacquiez <sebastien.wacquiez@enix.fr>\\
+        \textbf{From:} Paul Laffitte <paul.laffitte@enix.fr>\\
+        \textbf{Subject:} #1
+
+        \begin{center}
+        \line(1,0){300}
+        \end{center}
+
+        Hello Sébastien,
+
+        #2
+
+        Regards,\\
+        Paul
+
+        \begin{small}
+            Paul Laffitte\\
+            Developer at Enix\\
+            +33 6 01 04 24 96\\
+            paul.laffitte@enix.fr
+        \end{small}
+    }
+}
 
 % Document starts here
 \begin{document}
@@ -59,6 +84,9 @@
 
 % Contents
 \input{includes/introduction}
+\input{includes/1-a-new-recruit}
+\input{includes/2-san-iscsi-csi}
+\input{includes/3-tagfs}
 \input{includes/thanks}
 
 \listoffigures
