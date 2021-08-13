@@ -4,7 +4,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[english]{babel}
-% \usepackage[pdftex,colorlinks]{hyperref}
 \usepackage{listings}
 \usepackage{microtype}
 \usepackage[explicit]{titlesec}
@@ -14,7 +13,6 @@
 \usepackage{etoolbox}
 \usepackage{lastpage}
 \usepackage{index}
-% \usepackage{libertine}
 \usepackage{mdframed}
 \usepackage{colortbl}
 \usepackage{geometry}
@@ -25,7 +23,7 @@
 \usepackage{afterpage}
 \usepackage[parfill]{parskip}
 \usepackage{array}
-\usepackage[acronyms,style=super,order=word]{glossaries}
+\usepackage{glossaries}
 \usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
 \usepackage{csquotes}
 \usepackage{lmodern}
@@ -34,8 +32,11 @@
 % Configuration
 \pagenumbering{Roman}
 \input{config}
+\makeglossaries
+\makeindex
 
 % Variables
+\newcommand{\glsdef}[1]{\emph{*\gls{#1}}}
 \renewcommand{\title}{Storage in the cloud}
 \newcommand{\subtitle}{Internship report - Paul LAFFITTE}
 \newcommand{\mail}[2]{
@@ -92,5 +93,6 @@
 \listoffigures
 \clearpage
 
-\clearpage
+\printglossary
+
 \end{document}
