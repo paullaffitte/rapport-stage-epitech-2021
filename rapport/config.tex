@@ -38,7 +38,14 @@
   \newpage
 }
 
-% Acronyms configuration
+% Glossary and acronyms configuration
+\DeclareDocumentCommand{\newdualentry}{ O{} O{} m m m m } {
+  \newglossaryentry{gls-#3}{name={#5},text={#5\glsadd{#3}},
+    description={#6},#1
+  }
+  \makenoidxglossaries
+  \newacronym[see={[Glossary:]{gls-#3}},#2]{#3}{#4}{#5\glsadd{gls-#3}}
+}
 \loadglsentries{glossary}
 
 % General configuration

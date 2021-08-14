@@ -23,7 +23,7 @@
 \usepackage{afterpage}
 \usepackage[parfill]{parskip}
 \usepackage{array}
-\usepackage{glossaries}
+\usepackage[acronyms]{glossaries}
 \usepackage[backend=bibtex,style=verbose-trad2]{biblatex}
 \usepackage{csquotes}
 \usepackage{lmodern}
@@ -32,11 +32,13 @@
 % Configuration
 \pagenumbering{Roman}
 \input{config}
-\makeglossaries
+\makenoidxglossaries
 \makeindex
 
 % Variables
 \newcommand{\glsdef}[1]{\emph{*\gls{#1}}}
+\newcommand{\glsdeff}[2]{\emph{*#1{#2}}}
+\newcommand{\saniscsicsi}{\gls{san-iscsi-csi}}
 \renewcommand{\title}{Storage in the cloud}
 \newcommand{\subtitle}{Internship report - Paul LAFFITTE}
 \newcommand{\mail}[2]{
@@ -91,8 +93,7 @@
 \input{includes/thanks}
 
 \listoffigures
-\clearpage
-
-\printglossary
+\printnoidxglossary[type=\acronymtype]
+\printnoidxglossary
 
 \end{document}
