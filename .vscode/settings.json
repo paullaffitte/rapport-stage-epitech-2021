@@ -29,6 +29,6 @@
   "files.exclude": {
     "rapport.ist": true,
     "rapport/rapport-blx.bib": true,
-    "rapport/rapport.{aux,bbl,blg,fdb_latexmk,fls,glg,glo,gls,idx,ilg,ind,ist,lof,log,run.xml,toc}": true,
+    "rapport/rapport.{aux,bbl,blg,fdb_latexmk,fls,glg,glo,gls,idx,ilg,ind,ist,lof,log,run.xml,toc,acn,out}": true,
   },
 }
