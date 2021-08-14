@@ -1,3 +1,14 @@
+% Hyperref configuration
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=magenta,
+  citecolor=green,
+  urlcolor=cyan,
+  pdftitle={\title},
+  pdfauthor={Paul LAFFITTE}
+}
+
 % Chapters format
 \titleformat{\chapter}[frame]
 {\normalfont}
@@ -20,7 +31,7 @@
 \renewcommand{\footrulewidth}{1pt}}
 
 % Regular page headers and footers
-\lhead{\textbf{\title{}}}
+\lhead{\textbf{\title}}
 \chead{}
 \rhead{August 2021}
 \lfoot{Enix}
@@ -47,6 +58,8 @@
   \newacronym[see={[Glossary:]{gls-#3}},#2]{#3}{#4}{#5\glsadd{gls-#3}}
 }
 \loadglsentries{glossary}
+\makenoidxglossaries
+\makeindex
 
 % General configuration
 
