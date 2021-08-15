@@ -29,6 +29,14 @@ L'idée du produit Dothill-CSI est d'implémenter toutes les fonctionnalités av
 \color{darkgreen}
 L'approche des conteneurs est une nouvelle révolution dans la gestion d'applications sur un parc de machines en data centre.
 
+Nowadays, containerization of applications has become a golden standard in the industry. It allows to build, ship and run applications anywhere on-premises or in the cloud, with particular focus on portability and operability.
+
+A solution like Kubernetes is used to orchestrate containers and is able to manage the whole underlying infrastructure (network, storage, databases, etc.).
+
+On the storage side comes the concept of volume, which is actually a storage unit. A volume can be persistant or not, local or distant, dynamically or statically provisioned.
+
+CSI (Container Storage Interface) is a standard that comes to unify the process of dynamic provisionning of persistant volumes, local or distants.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{schema-containers.png}
@@ -95,6 +103,10 @@ La norme CSI met en relation deux composants : un système d'orchestration de co
     \caption{iSCSI protocol}
     \source{\href{https://dl.acronis.com/u/software-defined/html/AcronisCyberInfrastructure_3_5_admins_guide_en-US/exporting-storage/exporting-data-via-iscsi.html}{Exporting Storage via iSCSI}}
 \end{figure}
+
+CSI has been created to solve storage problematics for containerized workloads on Container Orchestration Systems (COs) like Kubernetes. It allows two actors, being the CO and the Storage Provider (SP), to interface together with the goal to provide storage where it's needed in the required quantity and size. The interface thus can be implemented as a CO or a SP.
+
+The CO will be able to ask the SP to create a volume with a specified size, resize it, snapshot it, and eventually delete it. It can ask the SP to mount a volume on a specific host in order to make storage available for it. It allows to easily change the location of a certain volume, allowing it to move in coordination with containers using it across a cluster.
 \color{black}
 
 \subsection{iSCSI protocol}
@@ -106,16 +118,24 @@ iSCSI est une abréviation de Internet Small Computer System Interface. C'est un
 \subsection{General overview}
 
 \color{darkgreen}
+In summary, the CO (Kubernetes in this schema, but it can be any CO implementing CSI) send CSI commands to node and controller servers. The controller uses the dothill-api-go library to send API calls to the appliance to create and map volumes. Nodes then attach and mount mapped devices on the host using the csi-lib-iscsi library, and Kubernetes bind mount the mounted path in containers requiring a volume.
+\color{black}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{schema-san-iscsi-csi-simplified.png}
+    \includegraphics[width=10cm]{schema-san-iscsi-csi-simplified.png}
     \caption{Interactions between \glsdef{k8s} and \saniscsicsi}
 \end{figure}
 
-\color{black}
-
 \subsection{Difficulties encountered}
+
+\color{darkgreen}
+Using multipathd was very important to us to achieve high-availability. However we had some trouble using it, multipathd is operating at a quite low level thus it's not always easy to understand what is going on.
+
+To ensure that our plugin is working perfectly smoothly, we tested it a lot, in many different use cases. The main issue we faced was filesystem corruption (which is a huge one). There are several cases in which multipathd can map devices in a way that can produce corruption or at least looks like a corruption. We fixed bugs one by one in order to ensure we have a fully corruption free driver.
+
+// state that it's still not working perfectly.
+\color{black}
 
 \section{Work team}
 \subsection{Context}
