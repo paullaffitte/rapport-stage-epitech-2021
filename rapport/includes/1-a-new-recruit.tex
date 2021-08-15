@@ -20,7 +20,101 @@ Today, \gls{enix} counts 15 employees and a few external collaborators. We work 
 
 \section{Project context}
 
+\color{darkgreen}
+L'idée du produit Dothill-CSI est d'implémenter toutes les fonctionnalités avant gardiste de Kubernetes en termes de stockage, sur des baies de stockage initialement non prévues à cet effet.
+\color{black}
+
+\subsection{Cloud context}
+
+\color{darkgreen}
+L'approche des conteneurs est une nouvelle révolution dans la gestion d'applications sur un parc de machines en data centre.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{schema-containers.png}
+    \caption{From traditional to containerized deployments}
+\end{figure}
+
+Un cluster d'orchestration tel que Kubernetes se compose de nombreux services spécialisés afin d'opérer un ensemble de conteneurs dans de bonnes conditions:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{schema-kubernetes-components.png}
+    \caption{Kubernetes components}
+\end{figure}
+
+D'un côté le Control Plane, de l'autre les Nodes.
+
+On note les composants suivants :
+
+etcd, hors scope du projet
+cloud-controller-manager, hors scope du projet
+kube-proxy, hors scope du projet
+et
+
+kube-controller
+kube-scheduler
+kube-apiserver
+kubelet
+\color{black}
+
+\subsection{Typical storage solution}
+
+\color{darkgreen}
+La société Dot Hill Systems Corp construit depuis 1997 des baies de stockage bon marché, elle a été rachetée par Seagate en 2015.
+
+Les modèles de baies disponibles depuis quelques années possèdent les fonctionnalités typiques attendues tout en restant bon marché. Elles sont d'ailleurs rebadgées par plusieurs constructeurs : Dell, HP, ...
+
+La fonctionnalité qui nous intéresse en particulier dans le cadre du projet Dothill-CSI est la disponibilité d'une API (documentée) permettant de contrôler la baie en question.
+\color{black}
+
+\subsection{Technical opportinity}
+
+\color{darkgreen}
+Kubernetes permet de gérer le stockage persistant attaché aux conteneurs via des ressources appelées Persistent Volumes. L'état de l'art étant de mettre à disposition à la volée des volumes en fonction de la demande, via le principe de Dynamic Volume Provisioning.
+
+La liste des types de volumes supportés est conséquente https://kubernetes.io/docs/concepts/storage/volumes/\#types-of-volumes. Elle intègre notamement le protocole iSCSI qui est supporté par les baies de stockage DotHill. Mais ce protocole iSCSI ne permet pas nativement le provisioning des volumes. C'est ce besoin précis que le projet Dothill-CSI cherche à traiter.
+\color{black}
+
 \section{General project architecture}
+
+\subsection{Working principle}
+
+\color{darkgreen}
+L'API Kubernetes propose deux ressources correspondant respectivement à une « demande de stockage » (Persistent Volume Claim) et à du « stockage disponible » (Persistent Volume). Les applications ayant besoin de stockage vont créer un ou plusieurs Persistent Volume Claims, et le plan de contrôle de Kubernetes va chercher ensuite à satisfaire ces demandes de stockage en les appairant avec des Persistent Volumes disponibles et répondant aux critères demandés.
+\color{black}
+
+\subsection{CSI specification}
+
+\color{darkgreen}
+La norme CSI met en relation deux composants : un système d'orchestration de conteneurs et un fournisseur de stockage. Le but d'un plugin CSI est de faire l'intermédiaire entre ces deux composants. L'avantage d'une telle architecture est de pouvoir développer un seul plugin CSI, utilisable par tous les orchestrateurs implémentant la norme.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{schema-iscsi.png}
+    \caption{iSCSI protocol}
+    \source{\href{https://dl.acronis.com/u/software-defined/html/AcronisCyberInfrastructure_3_5_admins_guide_en-US/exporting-storage/exporting-data-via-iscsi.html}{Exporting Storage via iSCSI}}
+\end{figure}
+\color{black}
+
+\subsection{iSCSI protocol}
+
+\color{darkgreen}
+iSCSI est une abréviation de Internet Small Computer System Interface. C'est un protocole réseau permettant d'émuler le fonctionnement du protocole SCSI, en transportant les commandes de ce protocole via un réseau IP. SCSI pour sa part est un standard définissant un bus informatique permettant de relier un ordinateur à un périphérique de stockage.
+\color{black}
+
+\subsection{General overview}
+
+\color{darkgreen}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{schema-san-iscsi-csi-simplified.png}
+    \caption{Interactions between \glsdef{k8s} and \saniscsicsi}
+\end{figure}
+
+\color{black}
+
 \subsection{Difficulties encountered}
 
 \section{Work team}
