@@ -1,45 +1,68 @@
-% Glossary entries
 \newglossaryentry{enix}{
     name={Enix},
-    description={TODO}
+    description={Enix SAS is a company providing \glsdef{cloud-native} \glsdef{k8s}\glsdef{devops} and services}
 }
 \newglossaryentry{san-iscsi-csi}{
     name={SAN iSCSI CSI},
-    description={A dynamic \glsdef{k8s-pv} provisioner for \acrshort{iscsi}-compatible \acrshort{san} based storage systems}
+    description={A dynamic \glsdef{k8s-pv} provisioner for \glsdef{iscsi}-compatible \glsdef{san} based storage systems}
 }
 
-%% Dev
+% Dev
 \newglossaryentry{open-source}{
     name={open-source},
-    description={TODO}
+    description={Software with its source code publicly available and editable}
 }
 \newglossaryentry{github}{
     name={GitHub},
-    description={TODO}
+    description={Project management platform with versionning through \glsdef{git}}
+}
+\newglossaryentry{git}{
+    name={Git},
+    description={Decentralised version management software}
 }
 
-%% CSI
+% CSI
 \newglossaryentry{dynamic-volume-provisioning}{
     name={dynamic volume provisioning},
-    description={TODO}
+    description={Process consisting of making \glsdef{k8s-pv} available on-demand}
 }
+\newdualentry{csi}
+    {CSI}
+    {Container Storage Interface}
+    {A storage specification for \glsdeff{\glspl}{container} defining a industry standard that will enable \glsdef{k8s-sp} to develop a plugin once and deploy it across a wide variety of \glsdeff{\glspl}{k8s-co}}
 
-%% K8s
-\newglossaryentry{orchestrator}{
-    name={orchestrator},
-    plural={orchestrators},
-    description={TODO}
-}
+% K8s
 \newglossaryentry{k8s}{
     name={Kubernetes},
-    description={TODO}
+    description={An \glsdef{open-source} \glsdef{k8s-co}}
 }
-\newglossaryentry{k8s-pv}{
-    name={persistent volume},
-    description={TODO}
+\newglossaryentry{container}{
+    name={container},
+    description={A standard unit of software that packages up code and all its dependencies and run in a sandboxed environment}
 }
+\newdualentry{k8s-pvc}
+    {PVC}
+    {Persistant Volume Claim}
+    {A request to \glsdef{k8s} to provide a \glsdef{k8s-pv}}
+\newdualentry{k8s-pv}
+    {PV}
+    {Persistant Volume}
+    {A \glsdef{k8s-volume} that persist over time, behave as a storage unit across a \glsdef{k8s} cluster}
+\newglossaryentry{k8s-volume}{
+    name={volume},
+    description={A virtual storage unit}
+}
+\newdualentry{k8s-co}
+    {CO}
+    {Container Orchestration system}
+    {Called also “orchestrators”, it automate management of \glsdef{container}-based applications}
+\newdualentry{k8s-sp}
+    {SP}
+    {Storage Provider}
+    {The vendor of a \glsdef{csi} plugin implementation}
 
-%% Clients
+
+% Clients
 \newglossaryentry{xbto}{
     name={XBTO},
     description={Cryptofinance services \url{https://www.xbto.com}}
@@ -61,29 +84,30 @@
     description={Aircraft manufacturer \url{https://www.airbus.com}}
 }
 
-%% Others
+% Others
 \newglossaryentry{cloud}{
     name={cloud},
-    description={TODO}
+    description={On-demand computer system resources available through internet, without direct management by the user}
 }
-\newglossaryentry{devops}{
-    name={devops},
-    description={TODO}
+\newglossaryentry{cloud-native}{
+    name={cloud native},
+    description={Approach to building and running applications that takes advantages of the \glsdef{cloud}}
 }
 
-% Acronyms
+\newglossaryentry{devops}{
+    name={DevOps},
+    description={A set of practices that combines software development (Dev) and IT operations (Ops)}
+}
+
 \newdualentry{san}
     {SAN}
-    {Storage Attached Network}
-    {TODO}
+    {Storage Area Network}
+    {A computer network which provide access to data storage}
 \newdualentry{iscsi}
     {iSCSI}
     {Internet Small Computer System Interface}
-    {TODO}
-\newdualentry{csi}
-    {CSI}
-    {Container Storage Interface}
-    {TODO}
+    {A storage networking standard allowing access to remote storage devices}
+
 \newacronym{b2b}
     {B2B}
     {Business To Business}
