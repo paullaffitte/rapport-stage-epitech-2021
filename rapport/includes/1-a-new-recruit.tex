@@ -46,7 +46,7 @@ As shown in \figref{fig:k8s-components}, there is on one hand the control plane,
 
 On the storage side comes the concept of \glsdef{volume}, which is actually a storage unit. A volume can be persistant or not, local or distant, dynamically or statically provisioned. Statically means that the \glsdef{volume} has been provisioned by someone manually, whereas dynamically means that someone only asked to have a \glsdef{volume} available and some software got the work done.
 
-\glsdef{csi} is a standard that comes to unify the process of \glsdef{dynamic-volume-provisioning} across \glsdeff{\glspl}{k8s-co}. It allows to dynamically provisionning of \glsdef{k8s-pv} through a configuration object called \glsdef{k8s-pvc}.
+\glsdef{csi} is a standard that comes to unify the process of \glsdef{dynamic-volume-provisioning} across \glsdeff{\glspl}{k8s-co}. It allows to dynamically provisioning of \glsdef{k8s-pv} through a configuration object called \glsdef{k8s-pvc}.
 
 \subsection{Typical storage solution}
 
@@ -56,11 +56,9 @@ The feature that comes handy in the context of \gls{san-iscsi-csi} is the availa
 
 \subsection{Technical opportinity}
 
-\color{darkgreen}
-Kubernetes permet de gérer le stockage persistant attaché aux conteneurs via des ressources appelées Persistent Volumes. L'état de l'art étant de mettre à disposition à la volée des volumes en fonction de la demande, via le principe de Dynamic Volume Provisioning.
+\glsdef{k8s} allows to manage \glsdeff{\glspl}{container} persistant storage thanks to \glsdef{k8s-pv}. The state of the art strategy is to provide \glsdeff{\glspl}{volume} on the fly, also called \glsdef{dynamic-volume-provisioning}.
 
-La liste des types de volumes supportés est conséquente https://kubernetes.io/docs/concepts/storage/volumes/\#types-of-volumes. Elle intègre notamement le protocole iSCSI qui est supporté par les baies de stockage DotHill. Mais ce protocole iSCSI ne permet pas nativement le provisioning des volumes. C'est ce besoin précis que le projet Dothill-CSI cherche à traiter.
-\color{black}
+The list of supported \glsdeff{\glspl}{volume} is consequent, see \href{https://kubernetes.io/docs/concepts/storage/volumes/\#types-of-volumes}{Kubernetes - Types of Volumes}. Some \glsdeff{\glspl}{volume} make use of the \glsdef{iscsi} protocol, which is the one used by Seagate appliances as well, but this protocol don't natively support \glsdef{dynamic-volume-provisioning}. It is that precise need that \gls{san-iscsi-csi} tries to fulfill.
 
 \section{General project architecture}
 
