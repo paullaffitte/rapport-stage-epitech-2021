@@ -2,7 +2,7 @@
 
 % Une partie destinée à un nouvel arrivant dans la société qui va reprendre / poursuivre le projet dans lequel vous avez été impliqué. Il faut donc lui décrire le contexte de l’entreprise, du projet, l’architecture générale de celui-ci, le contexte et l’organisation de l’équipe de travail, le tout de façon synthétique. Il faudra également y apporter les précisions quant aux difficultés rencontrées dans le projet.
 
-This part has for objective to onboard a new recruit in a project that I worked on during my internship which is \gls{san-iscsi-csi}, developped as an \glsdef{open-source} software on \glsdef{github}. This software allows to perform \glsdef{dynamic-volume-provisioning} on \glsdef{k8s} and \glsdeff{\acrshort}{csi}-compliant \glsdeff{\glspl}{k8s-co}.
+This part has for objective to onboard a new recruit in a project that I worked on during my internship which is \gls{san-iscsi-csi}, developped as an \glsdef{open-source} software on \glsdef{github}. This software allows to perform \glsdef{dynamic-volume-provisioning} on \glsdef{k8s} and \glsdefs{csi}-compliant \glsdeff{\glspl}{k8s-co}.
 
 \clearpage
 
@@ -14,7 +14,7 @@ We will first discuss the company context, followed by the project context and i
 
 \section{Company context}
 
-\gls{enix} SAS is a company selling \glsdef{cloud}, \glsdef{devops} and \glsdef{k8s} services in a \glsdeff{\acrshort}{b2b} business model. The company has been created in the early 2000s in the LAN parties environment. Sébastien, Romain, Alexandre, Jérôme and Laurent, student then, started this company in response to needs in infrastructure and networking during those events.
+\gls{enix} SAS is a company selling \glsdef{cloud}, \glsdef{devops} and \glsdef{k8s} services in a \glsdefs{b2b} business model. The company has been created in the early 2000s in the LAN parties environment. Sébastien, Romain, Alexandre, Jérôme and Laurent, student then, started this company in response to needs in infrastructure and networking during those events.
 
 Today, \gls{enix} counts 15 employees and a few external collaborators. We work for some big clients like \gls{xbto}, \gls{tdf}, \gls{maif}, \gls{ulule}, \gls{airbus} and others.
 
@@ -24,7 +24,7 @@ The idea from which \gls{san-iscsi-csi} came from is the one to implement all cu
 
 \subsection{Cloud context}
 
-Nowadays, \glsdef{containerization} (see \figref{fig:containers}) of applications has become a golden standard in the industry. It allows to build, ship and run applications anywhere \glsdef{on-prem} or in the \glsdef{cloud}, with particular focus on portability and operability. \glsdeff{\glspl}{container} allow to run softwares in a sandboxed environment, which increase security and are lighter than \glsdeff{\glspl}{virtual-machine} which require a full \glsdeff{\acrshort}{os} running for each instances.
+Nowadays, \glsdef{containerization} (see \figref{fig:containers}) of applications has become a golden standard in the industry. It allows to build, ship and run applications anywhere \glsdef{on-prem} or in the \glsdef{cloud}, with particular focus on portability and operability. \glsdeff{\glspl}{container} allow to run softwares in a sandboxed environment, which increase security and are lighter than \glsdeff{\glspl}{virtual-machine} which require a full \glsdefs{os} running for each instances.
 
 \begin{figure}[h]
     \centering
@@ -52,7 +52,7 @@ On the storage side comes the concept of \glsdef{volume}, which is actually a st
 
 Dot Hill Systems Corp, bought by Seagate in 2015, build since 1997 inexpensive storage appliances. Models available since years now have typical expected features and are rebranded by several constructors such as Dell or HP and so on. We choosed to implement our \glsdef{csi} plugin and make it compatible with a group of appliances provided by seagate.
 
-The feature that comes handy in the context of \gls{san-iscsi-csi} is the availability of a well documented \glsdeff{\acrshort}{api}, almost fully cross-compatible between models, versionned and allowing to control them remotely.
+The feature that comes handy in the context of \gls{san-iscsi-csi} is the availability of a well documented \glsdefs{api}, almost fully cross-compatible between models, versionned and allowing to control them remotely.
 
 \subsection{Technical opportinity}
 
@@ -64,14 +64,15 @@ The list of supported \glsdeff{\glspl}{volume} is consequent, see \href{https://
 
 \subsection{Working principle}
 
-\color{darkgreen}
-L'API Kubernetes propose deux ressources correspondant respectivement à une « demande de stockage » (Persistent Volume Claim) et à du « stockage disponible » (Persistent Volume). Les applications ayant besoin de stockage vont créer un ou plusieurs Persistent Volume Claims, et le plan de contrôle de Kubernetes va chercher ensuite à satisfaire ces demandes de stockage en les appairant avec des Persistent Volumes disponibles et répondant aux critères demandés.
-\color{black}
+\glsdef{k8s} \glsdefs{api} expose two resources which are storage requests (\glsdef{k8s-pvc}) and storage units (\glsdef{k8s-pv}). Applications can create \glsdeff{\glspl}{k8s-pvc} and the \glsdef{k8s} control plane will try to satisfy those requests through our \glsdef{csi} plugin, creating \glsdeff{\glspl}{k8s-pv} for the applications.
 
 \subsection{CSI specification}
 
-\color{darkgreen}
-La norme CSI met en relation deux composants : un système d'orchestration de conteneurs et un fournisseur de stockage. Le but d'un plugin CSI est de faire l'intermédiaire entre ces deux composants. L'avantage d'une telle architecture est de pouvoir développer un seul plugin CSI, utilisable par tous les orchestrateurs implémentant la norme.
+\glsdef{csi} specification connects two components: a \glsdef{k8s-co} and a \glsdef{k8s-sp}. The job of a \glsdef{csi} plugin is to do the middleman between them. The advantage of such an architecture is to make possible to develop a plugin once, and use it with every \glsdef{k8s-co} \glsdef{csi}-compatible.
+
+The \glsdef{k8s-co} will be able to ask the \glsdef{k8s-sp} to create a \glsdef{volume} with a specified size, resize it, and eventually delete it. It can ask the \glsdef{k8s-sp} to make storage available on a specific server. It allows to easily change the location of a certain \glsdef{volume}, allowing it to move in coordination with \glsdeff{\glspl}{container} using it across a \glsdef{cluster}.
+
+\subsection{iSCSI protocol}
 
 \begin{figure}[h]
     \centering
@@ -80,13 +81,6 @@ La norme CSI met en relation deux composants : un système d'orchestration de co
     \source{\href{https://dl.acronis.com/u/software-defined/html/AcronisCyberInfrastructure_3_5_admins_guide_en-US/exporting-storage/exporting-data-via-iscsi.html}{Exporting Storage via iSCSI}}
     \label{fig:icsci}
 \end{figure}
-
-CSI has been created to solve storage problematics for containerized workloads on Container Orchestration Systems (COs) like Kubernetes. It allows two actors, being the CO and the Storage Provider (SP), to interface together with the goal to provide storage where it is needed in the required quantity and size. The interface thus can be implemented as a CO or a SP.
-
-The CO will be able to ask the SP to create a volume with a specified size, resize it, snapshot it, and eventually delete it. It can ask the SP to mount a volume on a specific host in order to make storage available for it. It allows to easily change the location of a certain volume, allowing it to move in coordination with containers using it across a cluster.
-\color{black}
-
-\subsection{iSCSI protocol}
 
 \color{darkgreen}
 iSCSI est une abréviation de Internet Small Computer System Interface. C'est un protocole réseau permettant d'émuler le fonctionnement du protocole SCSI, en transportant les commandes de ce protocole via un réseau IP. SCSI pour sa part est un standard définissant un bus informatique permettant de relier un ordinateur à un périphérique de stockage.
