@@ -36,9 +36,25 @@
     name={Kubernetes},
     description={An \glsdef{open-source} \glsdef{k8s-co}}
 }
+\newglossaryentry{cluster}{
+    name={cluster},
+    description={A group of servers operating together}
+}
+\newglossaryentry{virtual-machine}{
+    name={virtual machine},
+    description={A software that emulate a full computer}
+}
 \newglossaryentry{container}{
     name={container},
     description={A standard unit of software that packages up code and all its dependencies and run in a sandboxed environment}
+}
+\newglossaryentry{containerization}{
+    name={containerization},
+    description={A process consisting of packaging applications using \glsdeff{\glspl}{container}. \figref{fig:containers}}
+}
+\newglossaryentry{volume}{
+    name={volume},
+    description={A virtual storage unit}
 }
 \newdualentry{k8s-pvc}
     {PVC}
@@ -47,11 +63,7 @@
 \newdualentry{k8s-pv}
     {PV}
     {Persistant Volume}
-    {A \glsdef{k8s-volume} that persist over time, behave as a storage unit across a \glsdef{k8s} cluster}
-\newglossaryentry{k8s-volume}{
-    name={volume},
-    description={A virtual storage unit}
-}
+    {A \glsdef{volume} that persist over time, behave as a storage unit across a \glsdef{k8s} cluster}
 \newdualentry{k8s-co}
     {CO}
     {Container Orchestration system}
@@ -60,7 +72,6 @@
     {SP}
     {Storage Provider}
     {The vendor of a \glsdef{csi} plugin implementation}
-
 
 % Clients
 \newglossaryentry{xbto}{
@@ -93,6 +104,10 @@
     name={cloud native},
     description={Approach to building and running applications that takes advantages of the \glsdef{cloud}}
 }
+\newglossaryentry{on-prem}{
+    name={on-premise},
+    description={On-premise infrastructure runs computers managed by the organization using it, rather than at a remote facility}
+}
 
 \newglossaryentry{devops}{
     name={DevOps},
@@ -107,6 +122,9 @@
     {iSCSI}
     {Internet Small Computer System Interface}
     {A storage networking standard allowing access to remote storage devices}
+\newacronym{os}
+    {OS}
+    {Operating System}
 
 \newacronym{b2b}
     {B2B}
