@@ -35,7 +35,7 @@ Nowadays, \glsdef{containerization} (see \figref{fig:containers}) of application
 
 A solution like \glsdef{k8s} is used to orchestrate \glsdeff{\glspl}{container} and is able to manage the whole underlying infrastructure (network, storage, databases, etc...). It is composed of several specialized services that operate a set of \glsdeff{\glspl}{container} in the right conditions.
 
-As shown in \figref{fig:k8s-components}, there is on one hand the control plane, which control the state of the \glsdef{cluster}, and on the other hand \glsdef{k8s} nodes, which are servers running orchestrated \glsdeff{\glspl}{container}.
+As shown in \figref{fig:k8s-components}, there is on one hand the control plane, which control the state of the \glsdef{cluster}, and on the other hand \glsdef{k8s} \glsdeff{\glspl}{k8s-node}, which are servers running orchestrated \glsdeff{\glspl}{container}.
 
 \begin{figure}[h]
     \centering
@@ -74,23 +74,17 @@ The \glsdef{k8s-co} will be able to ask the \glsdef{k8s-sp} to create a \glsdef{
 
 \subsection{iSCSI protocol}
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=\textwidth]{schema-iscsi.png}
-    \caption{iSCSI protocol}
-    \source{\href{https://dl.acronis.com/u/software-defined/html/AcronisCyberInfrastructure_3_5_admins_guide_en-US/exporting-storage/exporting-data-via-iscsi.html}{Exporting Storage via iSCSI}}
-    \label{fig:icsci}
-\end{figure}
+As said earlier, the appliance we choosed support the portocol \glsdef{iscsi}. \glsdef{iscsi} is a protocol that emulate the SCSI protocol over a network, like internet for instance. SCSI define how to link a computer with a storage device like a hard drive for example.
 
-\color{darkgreen}
-iSCSI est une abréviation de Internet Small Computer System Interface. C'est un protocole réseau permettant d'émuler le fonctionnement du protocole SCSI, en transportant les commandes de ce protocole via un réseau IP. SCSI pour sa part est un standard définissant un bus informatique permettant de relier un ordinateur à un périphérique de stockage.
-\color{black}
+Thanks to this protocol, we are able to link disks from the storage appliance to servers in a \glsdef{k8s} \glsdef{cluster}.
+
+In order to make the appliance highly availabile, it includes hardware redondancy of its controller, which is the part that allows communication with disks. This way, if one controller dies, there is still one available until the other is repaired or changed. This, however, had introduced some difficulties described later in this document.
 
 \subsection{General overview}
 
-\color{darkgreen}
-In summary, the CO (Kubernetes in this schema, but it can be any CO implementing CSI) send CSI commands to node and controller servers. The controller uses the dothill-api-go library to send API calls to the appliance to create and map volumes. Nodes then attach and mount mapped devices on the host using the csi-lib-iscsi library, and Kubernetes bind mount the mounted path in containers requiring a volume.
-\color{black}
+A \glsdef{csi} plugin is composed of two parts, a node, and a controller. The controller will control the appliance in order to make disks of required sizes available, resize them, and so on.., whereas the node will use the \glsdef{iscsi} protocol to link disks to servers where they run.
+
+There will be one controller per \glsdef{cluster}, and one node per \glsdef{k8s} \glsdef{k8s-node}. It can be tricky, but don't get confused between a \glsdef{csi} node (a software part of the plugin) and a \glsdef{k8s} \glsdef{k8s-node}, which is a server. Both node and controller servers receive \glsdef{csi} commands from \glsdef{k8s} through \glsdeff{\acrshort}{grpc}.
 
 \begin{figure}[h]
     \centering
@@ -98,6 +92,8 @@ In summary, the CO (Kubernetes in this schema, but it can be any CO implementing
     \caption{Interactions between \glsdef{k8s} and \gls{san-iscsi-csi}}
     \label{fig:k8s-san-scsi-csi}
 \end{figure}
+
+As you can see in the schema above, a last piece of software we didn't describe yet is the Dothill API Go library. It's a \glsdef{library} that we also open-sourced and that allows to control the storage appliance.
 
 \subsection{Difficulties encountered}
 

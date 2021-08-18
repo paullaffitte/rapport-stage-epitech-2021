@@ -20,6 +20,10 @@
     name={Git},
     description={Decentralised version management software}
 }
+\newglossaryentry{library}{
+    name={library},
+    description={A collection of functions that can be used in softwares using it}
+}
 
 % CSI
 \newglossaryentry{dynamic-volume-provisioning}{
@@ -30,6 +34,14 @@
     {CSI}
     {Container Storage Interface}
     {A storage specification for \glsdeff{\glspl}{container} defining a industry standard that will enable \glsdef{k8s-sp} to develop a plugin once and deploy it across a wide variety of \glsdeff{\glspl}{k8s-co}}
+\newdualentry{grpc}
+    {gRPC}
+    {google Remote Procedure Call}
+    {An implementation of the \glsdeff{\acrshort}{rpc} protocol by google}
+\newdualentry{rpc}
+    {RPC}
+    {Remote Procedure Call}
+    {A protocol allowing to remotely execute code on another computer}
 
 % K8s
 \newglossaryentry{k8s}{
@@ -55,6 +67,10 @@
 \newglossaryentry{volume}{
     name={volume},
     description={A virtual storage unit}
+}
+\newglossaryentry{k8s-node}{
+    name={node},
+    description={A server in a \glsdef{k8s} \glsdef{cluster}}
 }
 \newdualentry{k8s-pvc}
     {PVC}
