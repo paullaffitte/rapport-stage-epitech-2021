@@ -78,7 +78,7 @@ As said earlier, the appliance we choosed support the portocol \glsdef{iscsi}. \
 
 Thanks to this protocol, we are able to link disks from the storage appliance to servers in a \glsdef{k8s} \glsdef{cluster}.
 
-In order to make the appliance highly availabile, it includes hardware redondancy of its controller, which is the part that allows communication with disks. This way, if one controller dies, there is still one available until the other is repaired or changed. This, however, had introduced some difficulties described later in this document.
+In order to make the appliance highly availabile, it includes hardware redundancy of its controller, which is the part that allows communication with disks. This way, if one controller dies, there is still one available until the other is repaired or changed. This, however, had introduced some difficulties described later in this document.
 
 \subsection{General overview}
 
@@ -97,13 +97,11 @@ As you can see in the schema above, a last piece of software we didn't describe 
 
 \subsection{Difficulties encountered}
 
-\color{darkgreen}
-Using multipathd was very important to us to achieve high-availability. However we had some trouble using it, multipathd is operating at a quite low level thus it is not always easy to understand what is going on.
+In a previous section, we talked about difficulties introduced by the use of \glsdef{iscsi} and the fact that the Seagate appliance supports controllers redundancy. In order to use this feature, several \glsdef{iscsi} connexions have to be opened. But each connexion will be shown on the client computer as an individual disk. And here comes a last tool called \glsdef{multipathd}. This tool allows to take several disks, and show them as one single disk. If one disk fail because the connexion or the controller failed, there is still at least one disk working, so the main disk created by \glsdef{multipathd} will still be working.
 
-To ensure that our plugin is working perfectly smoothly, we tested it a lot, in many different use cases. The main issue we faced was filesystem corruption (which is a huge one). There are several cases in which multipathd can map devices in a way that can produce corruption or at least looks like a corruption. We fixed bugs one by one in order to ensure we have a fully corruption free driver.
+\glsdef{multipathd} is an old tool that has been designed in the optic to be used by humans. It means that disks will be plugged and unplugged quite slowly compared to what a computer is capable of. With \gls{san-iscsi-csi}, plugging and unplugging disks is done by the plugin, not directly by a human. We thus started to face some \glsdef{concurrency} issues. For some surprising reasons, it happens that disks on the computer representing different disks on the appliance will be grouped together by \glsdef{multipathd}, which can cause some severe issues on the disk, including \glsdef{fs-corruption}.
 
-// state that it is still not working perfectly.
-\color{black}
+We spent several weeks on the issue already and \glsdef{multipathd} still seems to behave erratically. We however discovered many aspects of this tool and progressed in its understanding. But \glsdef{multipathd} is a very complex software and its community isn't that big, meaning that it's hard to find answers to some questions. We still have a lot to do around this subject, but a lot has been done too.
 
 \section{Work team}
 
