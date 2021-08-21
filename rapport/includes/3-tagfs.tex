@@ -4,6 +4,33 @@
 
 \clearpage
 
-\mail{TODO}{TODO}
+\mail{Project idea: TagFS - A filesystem based on tags}{
+    I'm currently working on a personal project that might interest Enix. Recently, Yohan Boniface asked on Slack if someone knew a filesystem allowing to add metadata on files. His goal is to classify files and be able to find them based on their metadata. An example he gave was “Find all files for which the producer is INSEE in 2021”.
+
+    The project I'm currently working on could most probably fit his needs. The example request stated above could be translated as a filesystem path as follows: \texttt{./@producer:insee/@year:2021} and is compatible with Linux, so it can operate on servers.
+
+    How this is different than another filesystem you will ask? In a classical filesystem, a file will be present in only one directory, for instance \texttt{./@producer:insee/@year:2021}. In this project, each file has tags assigned to it, the user can add and remove them as he pleases. Tags are then shown as directory to enable the user to navigate through them, thus, a file can be accessed via different tags and in whatever order, for instance \texttt{./@producer:insee/@year:2021} is the same as \texttt{./@year:2021/@producer:insee}. A file \texttt{demographie\_et\_creations\_des\_entreprises.pdf} can be present in the two previous directories, and also in \texttt{./@producer:insee} or \texttt{./@year:2021}.
+
+    This project could be a great opportunity to work with the French state, which is the potential client searching for a tool to classify their document like described above. This project could probably be open-sourced like our other projects and contribute to our online presence. Writing a blogpost on this subject could also improve our renown in this domain.
+
+    Since I already started this project as a personal project, I have a working prototype that I can show to you. I'm ready to continue on this, and I think that I have all the required capacities to complete this project. I'm used to work with low-level APIs and this first attempt with this prototype was quite successful.
+
+    Let's take an appointment to talk about this in a meeting. I let you choose the day, it's not a hurry but should be done in the next 7-10 days.
+
+    Thanks for your time, I hope this idea will pique your interest as much as it piqued mine.
+}
+
+
+
+% Yohan Boniface
+
+% Une idée de file system qui permet l'ajout de métadonnées custom aux fichiers ? C'est dans le cadre d'une réflexion sur une "base de jeux de données", donc l'idée serait de pouvoir ajouter une description, le nom du producteur, l'année de millésime, etc., et de pouvoir requêter le FS via ces champs, genre "Donne-moi tous les fichiers dont le producteur est INSEE"
+
+% on met pas les données de l'État chez les Gafam (en tout cas pas serveurs hors UE)
+
+% c'est juste que pour l'instant ils ont l'habitude de ranger selon l'équipe interne qui gère la donnée
+% sauf que du coup l'équipe d'à côté sait pas trop retrouver tel ou tel jeu de données
+% donc on pourrait ranger genre producteur/millésime ou millésime/producteur, mais du coup telle équipe va devoir chercher "ses" fichiers (dont elle est responsable) un peu partout
+% donc faudrait pouvoir taguer les fichiers en question selon l'équipe, par exemple, et on en revient au point initial ;)
 
 \clearpage
